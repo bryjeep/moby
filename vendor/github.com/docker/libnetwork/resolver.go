@@ -178,8 +178,14 @@ func (r *resolver) Stop() {
 	if r.tcpServer != nil {
 		r.tcpServer.Shutdown()
 	}
+	if r.conn != nil {
+		r.conn.Close()
+	}
+	if r.tcpListen != nil {
+		r.tcpListen.Close()
+	}
 	r.conn = nil
-	r.tcpServer = nil
+	r.tcpListen = nil
 	r.err = fmt.Errorf("setup not done yet")
 	r.tStamp = time.Time{}
 	r.count = 0
