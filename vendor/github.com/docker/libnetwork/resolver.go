@@ -180,9 +180,11 @@ func (r *resolver) Stop() {
 	}
 	if r.conn != nil {
 		r.conn.Close()
+		logrus.Debugf("[resolver] Closing UDP Listener")
 	}
 	if r.tcpListen != nil {
 		r.tcpListen.Close()
+		logrus.Debugf("[resolver] Closing TCP Listener")
 	}
 	r.conn = nil
 	r.tcpListen = nil
